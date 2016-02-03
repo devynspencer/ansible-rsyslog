@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Deploy rsyslog servers, relays, and clients to consolidate syslog data across a large environment.
 
 Requirements
 ------------
