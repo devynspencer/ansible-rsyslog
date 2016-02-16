@@ -12,3 +12,11 @@
   yum: >
     name=rsyslog
     state=latest
+
+- name: ensure client configuration exists
+  copy: >
+    src=files/client.rsyslog.conf
+    dest=/etc/rsyslog.conf
+    owner=root
+    group=root
+    mode=0600
