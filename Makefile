@@ -15,3 +15,6 @@ destroy:
 	vagrant destroy -f
 
 rebuild: destroy all configure
+
+logs:
+	vagrant ssh --command 'sudo tail -f /var/log/messages'
