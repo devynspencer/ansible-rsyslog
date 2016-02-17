@@ -8,6 +8,6 @@ $WorkDirectory {{ rsyslog_client_work_directory }}
 $ActionFileDefaultTemplate {{ rsyslog_client_action_template }}
 $IncludeConfig /etc/rsyslog.d/*.conf
 $OmitLocalLogging {{ rsyslog_client_omit_local_logging }}
-$IMJournalStateFile {{ rsyslog_client_imjournal_state_file }}
+$IMJournalStateFile {{ rsyslog_client_imjournal_file }}
 
 *.* @@{{ rsyslog_client_relay_fqdn }}:{{ rsyslog_client_relay_port }}
