@@ -14,8 +14,8 @@
     state=latest
 
 - name: ensure client configuration exists
-  copy: >
-    src=files/client.rsyslog.conf
+  template: >
+    src=templates/rsyslog.conf.j2
     dest=/etc/rsyslog.conf
     owner=root
     group=root
