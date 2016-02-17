@@ -11,4 +11,6 @@ $OmitLocalLogging {{ rsyslog_client_omit_local_logging }}
 $IMJournalStateFile {{ rsyslog_client_imjournal_file }}
 $PreserveFQDN {{ rsyslog_client_preserve_fqdn }}
 
+{% if inventory_hostname in groups['rsyslog_relays'] %}
 *.* @@{{ rsyslog_client_relay_fqdn }}:{{ rsyslog_client_relay_port }}
+{% endif %}
