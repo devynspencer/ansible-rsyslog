@@ -9,8 +9,8 @@
     mode=0600
 
 - name: ensure rsyslog process is monitored by snmpd
-  copy: >
-    src=files/rsyslog.snmpd.conf
+  template: >
+    src=templates/rsyslog.snmpd.conf
     dest={{ snmp_include_dir }}/rsyslog.conf
     owner=root
     group=root
