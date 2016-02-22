@@ -25,7 +25,7 @@
 
 - name: ensure client configuration exists
   template: >
-    src=templates/rsyslog.conf.j2
+    src=templates/rsyslog.snmpd.conf.j2
     dest=/etc/rsyslog.conf
     owner=root
     group=root
