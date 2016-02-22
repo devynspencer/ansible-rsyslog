@@ -8,6 +8,14 @@
     group=root
     mode=0600
 
+- name: ensure rsyslog process is monitored by snmpd
+  copy: >
+    src=files/rsyslog.snmpd.conf
+    dest={{ snmp_include_dir }}/rsyslog.conf
+    owner=root
+    group=root
+    mode=0600
+
 - name: ensure rsyslog package is installed
   yum: >
     name=rsyslog
