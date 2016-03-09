@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  remote_user: vagrant
-  sudo: yes
+
   roles:
-    - rsyslog-client
+    - role_under_test
