@@ -1,9 +1,16 @@
 ---
 
-rsyslog_client_work_directory: '/var/lib/rsyslog'
-rsyslog_client_action_template: 'RSYSLOG_TraditionalFileFormat'
-rsyslog_client_omit_local_logging: 'on'
-rsyslog_client_imjournal_file: 'imjournal.state'
-rsyslog_client_relay_fqdn: ''
-rsyslog_client_relay_port: '514'
-rsyslog_client_preserve_fqdn: 'on'
+rsyslog_work_directory: /var/lib/rsyslog
+
+rsyslog_action_template: RSYSLOG_TraditionalFileFormat
+
+rsyslog_omit_local_logging: on
+
+rsyslog_imjournal_file: imjournal.state
+
+rsyslog_relay_fqdn: logs.example.com
+
+rsyslog_relay_port: 514
+
+rsyslog_preserve_fqdn: on
+
