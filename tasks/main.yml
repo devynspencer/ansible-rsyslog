@@ -17,6 +17,8 @@
     mode=0600
   notify:
     - reload snmpd
+  when:
+    - rsyslog_enable_snmp_monitor
 
 - name: ensure rsyslog package is installed
   yum: >
