@@ -8,7 +8,9 @@ rsyslog_omit_local_logging: on
 
 rsyslog_imjournal_file: imjournal.state
 
-rsyslog_relay_fqdn: logs.example.com
+rsyslog_relays:
+  - logs.example.com
+  - logs.internal.example.com
 
 rsyslog_relay_port: 514
 

@@ -20,11 +20,14 @@ $IMJournalStateFile {{ rsyslog_imjournal_file }}
 $PreserveFQDN {{ rsyslog_preserve_fqdn }}
 $OmitLocalLogging {{ rsyslog_omit_local_logging }}
 
+{% for server in rsyslog_relays %}
 $WorkDirectory {{ rsyslog_work_directory }}
-$ActionQueueFileName fwdRule1 # unique name prefix for spool files
-$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+$ActionQueueFileName forward_logs_to_{{ server }} # unique name prefix for spool files
+$ActionQueueMaxDiskSpace 1g # 1gb space limit (use as much as possible)
 $ActionQueueSaveOnShutdown on # save messages to disk on shutdown
-$ActionQueueType LinkedList   # run asynchronously
-$ActionResumeRetryCount -1    # infinite retries if host is down
+$ActionQueueType LinkedList # run asynchronously
+$ActionResumeRetryCount -1 # infinite retries if host is down
 $ActionFileDefaultTemplate {{ rsyslog_action_template }}
-*.* @@{{ rsyslog_relay_fqdn }}:{{ rsyslog_relay_port }}
+*.* @@{{ server }}:{{ rsyslog_relay_port }}
+
+{% endfor %}
