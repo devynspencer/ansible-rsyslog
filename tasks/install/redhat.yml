@@ -1,0 +1,14 @@
+---
+
+- name: ensure rsyslog package repositories are installed
+  copy: >
+    src=files/rsyslog.repo
+    dest=/etc/yum.repos.d/rsyslog.repo
+    owner=root
+    group=root
+    mode=0600
+
+- name: ensure rsyslog package is installed
+  yum: >
+    name=rsyslog
+    state=latest

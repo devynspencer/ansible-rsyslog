@@ -1,0 +1,6 @@
+---
+
+- name: install rsyslog package
+  apt: >
+    name=rsyslog
+    state=installed

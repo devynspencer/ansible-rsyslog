@@ -1,12 +1,10 @@
 ---
 
-- name: ensure rsyslog package repositories are installed
-  copy: >
-    src=files/rsyslog.repo
-    dest=/etc/yum.repos.d/rsyslog.repo
-    owner=root
-    group=root
-    mode=0600
+- include: install/redhat.yml
+  when: ansible_os_family == 'redhat'
+
+- include: install/debian.yml
+  when: ansible_os_family == 'debian'
 
 - name: ensure rsyslog process is monitored by snmpd
   template: >
@@ -19,11 +17,6 @@
     - reload snmpd
   when:
     - rsyslog_enable_snmp_monitor
-
-- name: ensure rsyslog package is installed
-  yum: >
-    name=rsyslog
-    state=latest
 
 - name: ensure client configuration exists
   template: >
