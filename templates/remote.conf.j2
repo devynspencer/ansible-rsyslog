@@ -1,0 +1,15 @@
+{{ ansible_managed | comment }}
+
+{% for server in rsyslog_relays -%}
+
+# send logs to remote relay: {{ server }}
+#
+$ActionQueueFileName        forward_logs_to_{{ server }}
+$ActionQueueMaxDiskSpace    1g
+$ActionQueueSaveOnShutdown  on
+$ActionQueueType            LinkedList
+$ActionResumeRetryCount     -1
+$ActionFileDefaultTemplate  {{ rsyslog_action_template }}
+*.* @@{{ server }}:{{ rsyslog_relay_port }}
+
+{% endfor %}

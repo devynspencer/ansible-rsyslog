@@ -6,10 +6,30 @@
 - include: install/debian.yml
   when: ansible_os_family == 'debian'
 
-- name: ensure client configuration exists
+- name: configure rsyslog
   template: >
     src=templates/rsyslog.conf.j2
     dest=/etc/rsyslog.conf
+    owner=root
+    group=root
+    mode=0600
+  notify:
+    - restart rsyslog
+
+- name: configure local logging
+  template: >
+    src=templates/local.conf.j2
+    dest=/etc/rsyslog/conf.d/local.conf
+    owner=root
+    group=root
+    mode=0600
+  notify:
+    - restart rsyslog
+
+- name: configure remote logging
+  template: >
+    src=templates/remote.conf.j2
+    dest=/etc/rsyslog.d/remote.conf
     owner=root
     group=root
     mode=0600
