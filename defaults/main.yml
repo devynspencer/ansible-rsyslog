@@ -4,7 +4,7 @@ rsyslog_work_directory: /var/lib/rsyslog
 
 rsyslog_action_template: RSYSLOG_TraditionalFileFormat
 
-rsyslog_omit_local_logging: on
+rsyslog_omit_local_logging: 'on'
 
 rsyslog_imjournal_file: imjournal.state
 
@@ -14,6 +14,6 @@ rsyslog_relays:
 
 rsyslog_relay_port: 514
 
-rsyslog_preserve_fqdn: on
+rsyslog_preserve_fqdn: 'on'
 
 rsyslog_enable_snmp_monitor: no
