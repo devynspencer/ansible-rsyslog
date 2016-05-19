@@ -19,7 +19,7 @@
 - name: configure local logging
   template: >
     src=templates/local.conf.j2
-    dest=/etc/rsyslog/conf.d/local.conf
+    dest=/etc/rsyslog.d/local.conf
     owner=root
     group=root
     mode=0600
