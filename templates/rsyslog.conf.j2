@@ -9,3 +9,11 @@ $IMJournalStateFile {{ rsyslog_imjournal_file }}
 $PreserveFQDN {{ rsyslog_preserve_fqdn }}
 $OmitLocalLogging {{ rsyslog_omit_local_logging }}
 $WorkDirectory {{ rsyslog_work_directory }}
+
+$FileUser {{ rsyslog_user }}
+$FileGroup {{ rsyslog_group }}
+$FileCreateMode 0644
+
+$DirUser {{ rsyslog_user }}
+$DirGroup {{ rsyslog_group }}
+$DirCreateMode 0700

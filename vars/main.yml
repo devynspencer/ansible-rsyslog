@@ -1,2 +1,5 @@
 ---
-# vars file for ansible-rsyslog
+
+rsyslog_user: root
+
+rsyslog_group: root
