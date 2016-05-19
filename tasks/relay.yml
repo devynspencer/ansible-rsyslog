@@ -1,0 +1,19 @@
+---
+
+- name: ensure relay logs directory exists
+  file: >
+    path={{ rsyslog_relay_logs_dir }}
+    owner={{ rsyslog_user }}
+    group={{ rsyslog_group }}
+    mode=0755
+    state=directory
+
+- name: configure host as a remote relay
+  template: >
+    src=templates/relay.conf.j2
+    dest=/etc/rsyslog.d/relay.conf
+    owner=root
+    group=root
+    mode=0600
+  notify:
+    - restart rsyslog

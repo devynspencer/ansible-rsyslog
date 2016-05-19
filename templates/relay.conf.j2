@@ -1,0 +1,50 @@
+{{ ansible_managed | comment }}
+
+$ModLoad imudp
+$UDPServerRun 514
+
+$ModLoad imtcp
+$InputTCPServerRun 514
+
+$template PerHostAuth, "/srv/logs/%HOSTNAME%/auth.log"
+$template PerHostCron, "/srv/logs/%HOSTNAME%/cron.log"
+$template PerHostSyslog, "/srv/logs/%HOSTNAME%/syslog"
+$template PerHostDaemon, "/srv/logs/%HOSTNAME%/daemon.log"
+$template PerHostKern, "/srv/logs/%HOSTNAME%/kern.log"
+$template PerHostLpr, "/srv/logs/%HOSTNAME%/lpr.log"
+$template PerHostUser, "/srv/logs/%HOSTNAME%/user.log"
+$template PerHostMail, "/srv/logs/%HOSTNAME%/mail.log"
+$template PerHostMailInfo, "/srv/logs/%HOSTNAME%/mail.info"
+$template PerHostMailWarn, "/srv/logs/%HOSTNAME%/mail.warn"
+$template PerHostMailErr, "/srv/logs/%HOSTNAME%/mail.err"
+$template PerHostNewsCrit, "/srv/logs/%HOSTNAME%/news.crit"
+$template PerHostNewsErr, "/srv/logs/%HOSTNAME%/news.err"
+$template PerHostNewsNotice, "/srv/logs/%HOSTNAME%/news.notice"
+$template PerHostDebug, "/srv/logs/%HOSTNAME%/debug"
+$template PerHostMessages, "/srv/logs/%HOSTNAME%/messages"
+
+auth,authpriv.*         ?PerHostAuth
+*.*;auth,authpriv.none  -?PerHostSyslog
+cron.*                  ?PerHostCron
+daemon.*                -?PerHostDaemon
+kern.*                  -?PerHostKern
+lpr.*                   -?PerHostLpr
+mail.*                  -?PerHostMail
+user.*                  -?PerHostUser
+
+mail.info               -?PerHostMailInfo
+mail.warn               ?PerHostMailWarn
+mail.err                ?PerHostMailErr
+
+news.crit               ?PerHostNewsCrit
+news.err                ?PerHostNewsErr
+news.notice             -?PerHostNewsNotice
+
+*.=debug;\
+  auth,authpriv.none;\
+  news.none;mail.none   -?PerHostDebug
+
+*.=info;*.=notice;*.=warn;\
+  auth,authpriv.none;\
+  cron,daemon.none;\
+  mail,news.none        -?PerHostMessages
