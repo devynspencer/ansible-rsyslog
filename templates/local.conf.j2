@@ -1,12 +1,12 @@
 {{ ansible_managed | comment }}
 
-kern.*				 /dev/console
-*.emerg        :omusrmsg:*
+kern.*          /dev/console
+*.emerg         :omusrmsg:*
 
-authpriv.*     /var/log/secure
-mail.*         /var/log/maillog
-cron.*         /var/log/cron
-uucp,news.crit /var/log/spooler
-local7.*       /var/log/boot.log
+authpriv.*      /var/log/auth.log
+mail.*          /var/log/mail.log
+cron.*          /var/log/cron.log
+uucp,news.crit  /var/log/spooler.log
+local7.*        /var/log/boot.log
 
 *.info;mail.none;authpriv.none;cron.none /var/log/messages
