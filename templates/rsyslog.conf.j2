@@ -3,8 +3,6 @@
 module(load="imuxsock") # system logging
 module(load="imklog")   # kernel logging
 
-$IncludeConfig /etc/rsyslog.d/*.conf
-
 $IMJournalStateFile {{ rsyslog_imjournal_file }}
 $PreserveFQDN {{ rsyslog_preserve_fqdn }}
 $OmitLocalLogging {{ rsyslog_omit_local_logging }}
@@ -17,3 +15,5 @@ $FileCreateMode 0644
 $DirUser {{ rsyslog_user }}
 $DirGroup {{ rsyslog_group }}
 $DirCreateMode 0700
+
+$IncludeConfig /etc/rsyslog.d/*.conf
