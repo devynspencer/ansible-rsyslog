@@ -36,6 +36,9 @@
   notify:
     - restart rsyslog
 
+- include: relay.yml
+  when: "'rsyslog_relays' in group_names"
+
 - include: monitor.yml
   when:
     - rsyslog_enable_snmp_monitor
