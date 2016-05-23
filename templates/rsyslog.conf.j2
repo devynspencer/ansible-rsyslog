@@ -1,6 +1,6 @@
 {{ ansible_managed | comment }}
 
-{% for module in rsyslog modules %}
+{% for module in rsyslog_modules %}
 module(load="{{ module }}")
 {% endfor %}
 
