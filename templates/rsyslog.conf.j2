@@ -4,6 +4,11 @@
 module(load="{{ module }}")
 {% endfor %}
 
+{# enable systemd journal as an input for rhel/centos 7 systems #}
+{% if (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7") %}
+module(load="imjournal")
+{% endif %}
+
 $WorkDirectory {{ rsyslog_work_directory }}
 $PreserveFQDN {{ rsyslog_preserve_fqdn }}
 
