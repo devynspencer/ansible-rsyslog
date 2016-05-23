@@ -1,10 +1,10 @@
 ---
 
 - include: install/redhat.yml
-  when: ansible_os_family == 'redhat'
+  when: ansible_os_family == 'RedHat'
 
 - include: install/debian.yml
-  when: ansible_os_family == 'debian'
+  when: ansible_os_family == 'Debian'
 
 - name: ensure work directory exists
   file: >
