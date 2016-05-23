@@ -1,7 +1,8 @@
 {{ ansible_managed | comment }}
 
-module(load="imuxsock") # system logging
-module(load="imklog")   # kernel logging
+{% for module in rsyslog modules %}
+module(load="{{ module }}")
+{% endfor %}
 
 $IMJournalStateFile {{ rsyslog_imjournal_file }}
 $PreserveFQDN {{ rsyslog_preserve_fqdn }}
