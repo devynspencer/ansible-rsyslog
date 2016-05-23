@@ -1,0 +1,7 @@
+{{ ansible_managed | comment }}
+
+[rsyslog_v8]
+name=Rsyslog {{ ansible_distribution }} {{ ansible_distribution_major_version }} - {{ ansible_architecture }}
+baseurl=http://rpms.adiscon.com/v8-stable/epel-{{ ansible_distribution_major_version }}/{{ ansible_architecture }}
+enabled=1
+gpgcheck=0
