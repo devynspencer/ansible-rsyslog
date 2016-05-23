@@ -6,6 +6,14 @@
 - include: install/debian.yml
   when: ansible_os_family == 'debian'
 
+- name: ensure work directory exists
+  file: >
+    path={{ rsyslog_work_directory }}
+    owner={{ rsyslog_user }}
+    group={{ rsyslog_group }}
+    mode=0755
+    state=directory
+
 - name: configure rsyslog
   template: >
     src=templates/rsyslog.conf.j2
