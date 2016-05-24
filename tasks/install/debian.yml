@@ -1,5 +1,10 @@
 ---
 
+- name: ensure package repository is installed
+  apt_repository: >
+    repo='deb http://debian.adiscon.com/v8-stable {{ ansible_distribution_release }}'
+    state=present
+
 - name: install rsyslog package
   apt: >
     name=rsyslog
