@@ -7,13 +7,13 @@ module(load="{{ module }}")
 {# enable systemd journal as an input for rhel/centos 7 systems #}
 {% if (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7") %}
 module(load="imjournal")
+$IMJournalStateFile {{ rsyslog_imjournal_file }}
 {% endif %}
 
 $WorkDirectory {{ rsyslog_work_directory }}
 $PreserveFQDN {{ rsyslog_preserve_fqdn }}
 
 {% if ansible_os_family == "RedHat" %}
-$IMJournalStateFile {{ rsyslog_imjournal_file }}
 $OmitLocalLogging {{ rsyslog_omit_local_logging }}
 
 $FileUser {{ rsyslog_user }}
