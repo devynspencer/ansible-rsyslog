@@ -13,7 +13,6 @@ $IMJournalStateFile {{ rsyslog_imjournal_file }}
 $WorkDirectory {{ rsyslog_work_directory }}
 $PreserveFQDN {{ rsyslog_preserve_fqdn }}
 
-{% if ansible_os_family == "RedHat" %}
 $OmitLocalLogging {{ rsyslog_omit_local_logging }}
 
 $FileUser {{ rsyslog_user }}
@@ -23,6 +22,5 @@ $FileCreateMode 0644
 $DirUser {{ rsyslog_user }}
 $DirGroup {{ rsyslog_group }}
 $DirCreateMode 0700
-{% endif %}
 
 $IncludeConfig /etc/rsyslog.d/*.conf
