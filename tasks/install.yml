@@ -1,0 +1,36 @@
+---
+
+- block:
+
+    - name: ensure package repository is installed
+      template: >
+        src=templates/rsyslog.repo.j2
+        dest=/etc/yum.repos.d/rsyslog.repo
+        owner=root
+        group=root
+        mode=0644
+
+    - name: ensure rsyslog package is installed
+      yum: >
+        name=rsyslog
+        state=latest
+
+  when: ansible_os_family == "RedHat"
+
+
+- block:
+
+    - name: ensure package repository is installed
+      template: >
+        src=templates/rsyslog.list.j2
+        dest=/etc/apt/sources.list.d/rsyslog.list
+        owner=root
+        group=root
+        mode=0644
+
+    - name: install rsyslog package
+      apt: >
+        name=rsyslog
+        state=installed
+
+  when: ansible_os_family == "Debian"
