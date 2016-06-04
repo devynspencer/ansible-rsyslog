@@ -1,5 +1,11 @@
 ---
 
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - "default.yml"
+
 - include: install.yml
 
 - name: ensure work directory exists

@@ -25,6 +25,8 @@
         keyserver=keyserver.ubuntu.com
         id=AEF0CF8E
 
+      when: rsyslog_repository is defined
+
     - name: ensure package repository is installed
       template: >
         src=templates/rsyslog.list.j2
@@ -32,6 +34,8 @@
         owner=root
         group=root
         mode=0644
+
+      when: rsyslog_repository is defined
 
     - name: install rsyslog package
       apt: >
