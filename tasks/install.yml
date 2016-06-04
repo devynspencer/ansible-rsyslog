@@ -20,6 +20,11 @@
 
 - block:
 
+    - name: install ubuntu gpg key
+      apt_key: >
+        keyserver=keyserver.ubuntu.com
+        id=AEF0CF8E
+
     - name: ensure package repository is installed
       template: >
         src=templates/rsyslog.list.j2
