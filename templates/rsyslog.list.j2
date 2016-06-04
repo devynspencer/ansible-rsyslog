@@ -6,6 +6,6 @@ deb-src http://ppa.launchpad.net/adiscon/v8-stable/ubuntu {{ ansible_distributio
 {% endif %}
 
 {% if (ansible_distribution | lower) == "debian" %}
-deb http://debian.adiscon.com/v8-stable {{ ansible_distribution_release }}/
-deb-src http://debian.adiscon.com/v8-stable {{ ansible_distribution_release }}/
+deb http://debian.adiscon.com/v8-stable wheezy/
+deb-src http://debian.adiscon.com/v8-stable wheezy/
 {% endif %}
