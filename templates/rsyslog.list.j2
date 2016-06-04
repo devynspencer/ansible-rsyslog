@@ -1,4 +1,11 @@
 {{ ansible_managed | comment }}
 
+{% if (ansible_distribution | lower) == "ubuntu" %}
+deb http://ppa.launchpad.net/adiscon/v8-stable/ubuntu {{ ansible_distribution_release }} main
+deb-src http://ppa.launchpad.net/adiscon/v8-stable/ubuntu {{ ansible_distribution_release }} main
+{% endif %}
+
+{% if (ansible_distribution | lower) == "debian" %}
 deb http://debian.adiscon.com/v8-stable {{ ansible_distribution_release }}/
 deb-src http://debian.adiscon.com/v8-stable {{ ansible_distribution_release }}/
+{% endif %}
