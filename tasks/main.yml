@@ -6,40 +6,9 @@
 - name: include installation tasks
   include: install.yml
 
+- name: include general configuration tasks
+  include: configure.yml
 
-
-- name: configure rsyslog
-  template: >
-    src=templates/rsyslog.conf.j2
-    dest=/etc/rsyslog.conf
-    owner=root
-    group=root
-    mode=0600
-    backup=yes
-  notify:
-    - restart rsyslog
-
-- name: configure local logging
-  template: >
-    src=templates/local.conf.j2
-    dest=/etc/rsyslog.d/local.conf
-    owner=root
-    group=root
-    mode=0600
-    backup=yes
-  notify:
-    - restart rsyslog
-
-- name: configure remote logging
-  template: >
-    src=templates/remote.conf.j2
-    dest=/etc/rsyslog.d/remote.conf
-    owner=root
-    group=root
-    mode=0600
-    backup=yes
-  notify:
-    - restart rsyslog
 
 - include: relay.yml
   when: "'rsyslog_relays' in group_names"
