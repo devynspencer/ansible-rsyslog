@@ -26,22 +26,14 @@
         group=root
         mode=0644
 
-    - name: ensure rsyslog package is installed
-      yum: >
-        name=rsyslog
-        state=latest
-
-  when: ansible_os_family == "RedHat"
-
-
-- block:
+      when: ansible_os_family == "RedHat"
 
     - name: install ubuntu gpg key
       apt_key: >
         keyserver=keyserver.ubuntu.com
         id=AEF0CF8E
 
-      when: rsyslog_repository is defined
+      when: ansible_os_family == "Debian"
 
     - name: ensure package repository is installed
       template: >
@@ -51,11 +43,12 @@
         group=root
         mode=0644
 
-      when: rsyslog_repository is defined
+      when: ansible_os_family == "Debian"
 
-    - name: install rsyslog package
-      apt: >
-        name=rsyslog
-        state=installed
+  when: rsyslog_repository is defined
 
-  when: ansible_os_family == "Debian"
+- name: ensure rsyslog package is installed
+  package: >
+    name={{ item }}
+    state=latest
+  with_items: "{{ rsyslog_packages }}"
