@@ -1,5 +1,21 @@
 ---
 
+- name: ensure work directory exists
+  file: >
+    path={{ rsyslog_work_directory }}
+    owner={{ rsyslog_user }}
+    group={{ rsyslog_group }}
+    mode=0755
+    state=directory
+
+- name: ensure includes directory exists
+  file: >
+    path=/etc/rsyslog.d
+    owner=root
+    group=root
+    mode=0755
+    state=directory
+
 - block:
 
     - name: ensure package repository is installed
