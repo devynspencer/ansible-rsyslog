@@ -27,3 +27,5 @@ rsyslog_enable_snmp_monitor: no
 rsyslog_user: root
 
 rsyslog_group: root
+
+# rsyslog_umask: '0022'

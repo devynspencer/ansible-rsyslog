@@ -23,4 +23,8 @@ $DirUser {{ rsyslog_user }}
 $DirGroup {{ rsyslog_group }}
 $DirCreateMode 0700
 
+{% if (rsyslog_umask is defined) and (rsyslog_umask | string) %}
+$Umask {{ rsyslog_umask }}
+{% endif %}
+
 $IncludeConfig /etc/rsyslog.d/*.conf
