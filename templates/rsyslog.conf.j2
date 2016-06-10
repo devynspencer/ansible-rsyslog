@@ -17,11 +17,11 @@ $OmitLocalLogging {{ rsyslog_omit_local_logging }}
 
 $FileUser {{ rsyslog_user }}
 $FileGroup {{ rsyslog_group }}
-$FileCreateMode 0644
+$FileCreateMode {{ rsyslog_file_mode | default('0644') }}
 
 $DirUser {{ rsyslog_user }}
 $DirGroup {{ rsyslog_group }}
-$DirCreateMode 0700
+$DirCreateMode {{ rsyslog_dir_mode | default('0755') }}
 
 {% if (rsyslog_umask is defined) and (rsyslog_umask | string) %}
 $Umask {{ rsyslog_umask }}
