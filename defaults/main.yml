@@ -4,7 +4,7 @@ rsyslog_modules:
   - imklog
   - imuxsock
 
-rsyslog_work_directory: /var/lib/rsyslog
+rsyslog_work_dir: /var/lib/rsyslog
 
 rsyslog_action_template: RSYSLOG_TraditionalFileFormat
 
