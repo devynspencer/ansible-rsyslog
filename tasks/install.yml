@@ -45,7 +45,7 @@
 
       when: ansible_os_family == "Debian"
 
-  when: rsyslog_repository is defined
+  when: rsyslog_repository_url is defined
 
 - name: ensure rsyslog package is installed
   package: >
