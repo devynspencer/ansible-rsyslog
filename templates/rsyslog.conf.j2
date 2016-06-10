@@ -4,8 +4,8 @@
 module(load="{{ module }}")
 {% endfor %}
 
-{# enable systemd journal as an input for rhel/centos 7 systems #}
 {% if (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7") %}
+# enable systemd journal as an input
 module(load="imjournal")
 $IMJournalStateFile {{ rsyslog_imjournal_file }}
 {% endif %}
