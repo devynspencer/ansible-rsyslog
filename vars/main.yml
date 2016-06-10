@@ -1,9 +1,3 @@
 ---
 
 rsyslog_packages: ['rsyslog']
-
-rsyslog_relay_logs_dir: /srv/logs
-
-rsyslog_user: root
-
-rsyslog_group: root

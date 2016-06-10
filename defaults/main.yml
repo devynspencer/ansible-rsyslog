@@ -6,6 +6,8 @@ rsyslog_modules:
 
 rsyslog_work_dir: /var/lib/rsyslog
 
+rsyslog_relay_logs_dir: /srv/logs
+
 rsyslog_action_template: RSYSLOG_TraditionalFileFormat
 
 rsyslog_omit_local_logging: 'on'
@@ -21,3 +23,7 @@ rsyslog_relay_port: 514
 rsyslog_preserve_fqdn: 'on'
 
 rsyslog_enable_snmp_monitor: no
+
+rsyslog_user: root
+
+rsyslog_group: root
