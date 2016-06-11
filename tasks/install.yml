@@ -36,12 +36,11 @@
       when: ansible_os_family == "Debian"
 
     - name: ensure package repository is installed
-      template: >
-        src=templates/rsyslog.list.j2
-        dest=/etc/apt/sources.list.d/rsyslog.list
-        owner=root
-        group=root
-        mode=0644
+      apt_repository: >
+        repo="deb {{ rsyslog_repository_url }}"
+        filename=rsyslog
+        update_cache=yes
+        state=present
 
       when: ansible_os_family == "Debian"
 
