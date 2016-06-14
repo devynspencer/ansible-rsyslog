@@ -22,8 +22,6 @@ rsyslog_relay_port: 514
 
 rsyslog_preserve_fqdn: 'on'
 
-rsyslog_enable_snmp_monitor: no
-
 rsyslog_user: root
 
 rsyslog_group: root
