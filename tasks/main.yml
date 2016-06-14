@@ -9,9 +9,10 @@
 - name: include general configuration tasks
   include: configure.yml
 
+- name: include relay server configuration tasks
+  include: relay.yml
+  when: "rsyslog_relays" in group_names
 
-- include: relay.yml
-  when: "'rsyslog_relays' in group_names"
 - name: include process monitoring tasks
   include: monitor.yml
   when: rsyslog_enable_snmp_monitor
