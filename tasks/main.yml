@@ -15,3 +15,8 @@
 - name: include process monitoring tasks
   include: monitor.yml
   when: rsyslog_enable_snmp_monitor
+
+- name: include logrotate partial configuration tasks
+  include: logrotate.yml
+  when: rsyslog_rotated_logs is defined
+  tags: ["logrotate"]

@@ -29,3 +29,11 @@ rsyslog_user: root
 rsyslog_group: root
 
 # rsyslog_umask: '0022'
+
+rsyslog_rotated_logs:
+  - /var/log/auth.log
+  - /var/log/mail.log
+  - /var/log/cron.log
+  - /var/log/spooler.log
+  - /var/log/boot.log
+  - /var/log/messages
