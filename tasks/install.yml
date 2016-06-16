@@ -38,7 +38,6 @@
     - name: ensure package repository is installed
       apt_repository: >
         repo="deb {{ rsyslog_repository_url }}"
-        filename=rsyslog
         update_cache=yes
         state=present
 
