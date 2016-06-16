@@ -11,7 +11,7 @@
 
 - name: include relay server configuration tasks
   include: relay.yml
-  when: "rsyslog_relays" in group_names
+  when: false
 
 - name: include logrotate partial configuration tasks
   include: logrotate.yml
