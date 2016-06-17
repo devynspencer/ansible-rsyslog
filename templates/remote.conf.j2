@@ -1,5 +1,6 @@
 {{ ansible_managed | comment }}
 
+{% if rsyslog_relays is defined %}
 {% for server in rsyslog_relays -%}
 
 {# don't configure self as remote log destination #}
@@ -17,3 +18,4 @@ $ActionFileDefaultTemplate  {{ rsyslog_action_template }}
 
 {% endif %}
 {% endfor %}
+{% endif %}
