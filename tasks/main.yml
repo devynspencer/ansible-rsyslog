@@ -2,18 +2,22 @@
 
 - name: include setup tasks
   include: setup.yml
+  tags: ["rsyslog:setup", "setup"]
 
 - name: include installation tasks
   include: install.yml
+  tags: ["rsyslog:install", "install"]
 
 - name: include general configuration tasks
   include: configure.yml
+  tags: ["rsyslog:configure", "configure"]
 
 - name: include relay server configuration tasks
   include: relay.yml
+  tags: ["rsyslog:relay", "relay"]
   when: false
 
 - name: include logrotate partial configuration tasks
   include: logrotate.yml
+  tags: ["rsyslog:logrotate", "logrotate"]
   when: rsyslog_rotated_logs is defined
-  tags: ["logrotate"]
