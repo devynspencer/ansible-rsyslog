@@ -15,11 +15,11 @@ $PreserveFQDN {{ rsyslog_preserve_fqdn }}
 
 $OmitLocalLogging {{ rsyslog_omit_local_logging }}
 
-$FileUser {{ rsyslog_user }}
+$FileOwner {{ rsyslog_user }}
 $FileGroup {{ rsyslog_group }}
 $FileCreateMode {{ rsyslog_file_mode | default('0644') }}
 
-$DirUser {{ rsyslog_user }}
+$DirOwner {{ rsyslog_user }}
 $DirGroup {{ rsyslog_group }}
 $DirCreateMode {{ rsyslog_dir_mode | default('0755') }}
 
