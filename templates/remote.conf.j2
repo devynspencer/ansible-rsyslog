@@ -3,7 +3,7 @@
 {% for server in rsyslog_relays -%}
 
 {# don't configure self as remote log destination #}
-{% if ansible_fqdn != server -%}
+{% if server != ansible_fqdn -%}
 
 # send logs to remote relay: {{ server }}
 #
