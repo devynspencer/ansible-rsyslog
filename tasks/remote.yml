@@ -1,0 +1,12 @@
+---
+
+- name: configure remote logging
+  template: >
+    src=templates/remote.conf.j2
+    dest=/etc/rsyslog.d/remote.conf
+    owner=root
+    group=root
+    mode=0600
+    backup=yes
+
+  notify: ["restart rsyslog"]

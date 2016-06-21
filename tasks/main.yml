@@ -12,6 +12,10 @@
   include: configure.yml
   tags: ["rsyslog:configure", "configure"]
 
+- name: include remote logging tasks
+  include: remote.yml
+  tags: ["rsyslog:configure", "configure"]
+
 - name: include relay server configuration tasks
   include: relay.yml
   tags: ["rsyslog:relay", "relay"]
