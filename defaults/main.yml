@@ -1,5 +1,7 @@
 ---
 
+rsyslog_local_logging: yes
+
 rsyslog_modules: ["imklog", "imuxsock"]
 
 rsyslog_work_dir: /var/lib/rsyslog
