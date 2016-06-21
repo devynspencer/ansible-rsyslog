@@ -6,4 +6,3 @@
     - "vars/{{ ansible_distribution | lower }}_{{ ansible_distribution_major_version }}.yml"
     - "vars/{{ ansible_os_family | lower }}.yml"
     - "vars/main.yml"
-
