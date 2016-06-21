@@ -9,8 +9,7 @@
     mode=0644
     backup=yes
 
-  notify:
-    - restart rsyslog
+  notify: ["restart rsyslog"]
 
 - name: configure local logging
   template: >
@@ -21,8 +20,7 @@
     mode=0600
     backup=yes
 
-  notify:
-    - restart rsyslog
+  notify: ["restart rsyslog"]
 
 - name: configure remote logging
   template: >
@@ -33,5 +31,4 @@
     mode=0600
     backup=yes
 
-  notify:
-    - restart rsyslog
+  notify: ["restart rsyslog"]
