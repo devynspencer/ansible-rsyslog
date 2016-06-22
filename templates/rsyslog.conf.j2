@@ -13,6 +13,8 @@ $OmitLocalLogging off
 $SystemLogSocketName /run/systemd/journal/syslog
 {% endif %}
 
+$ActionFileDefaultTemplate {{ rsyslog_default_template }}
+
 $WorkDirectory {{ rsyslog_work_dir }}
 $LocalHostName {{ inventory_hostname }}
 $PreserveFQDN {% if rsyslog_preserve_fqdn %}on{% else %}off{% endif %}
