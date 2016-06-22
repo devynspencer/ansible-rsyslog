@@ -8,7 +8,7 @@
 # remote server: {{ remote.server }}:{{ remote.port }}
 # log format: {{ remote.format }}
 #
-$ActionQueueFileName        forward_logs_to_{{ remote.server }}
+$ActionQueueFileName        {{ remote.server }}.queue
 $ActionQueueMaxDiskSpace    1g
 $ActionQueueSaveOnShutdown  on
 $ActionQueueType            LinkedList
