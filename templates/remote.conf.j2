@@ -2,7 +2,7 @@
 
 {% include "json.part.j2" %}
 
-{%- for remote in rsyslog_destinations if (remote != ansible_fqdn) -%}
+{% for remote in rsyslog_destinations if (remote != ansible_fqdn) %}
 
 #
 # remote server: {{ remote.server }}:{{ remote.port }}
@@ -16,7 +16,7 @@ $ActionResumeRetryCount     -1
 $ActionFileDefaultTemplate  {{ rsyslog_action_template }}
 *.* @@{{ remote.server }}:{{ remote.port | default(rsyslog_port) }}{% if remote.format == "json" %};as_json{% endif %}
 
-{% else -%}
+{% else %}
 #
 # uh-oh!
 #
@@ -27,4 +27,4 @@ $ActionFileDefaultTemplate  {{ rsyslog_action_template }}
 # group_vars or host_vars file:
 #
 #   syslog_destinations: ["server.example.com"]
-{%- endfor -%}
+{% endfor %}
