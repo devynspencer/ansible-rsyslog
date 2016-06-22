@@ -20,7 +20,7 @@ rsyslog_user: root
 
 rsyslog_group: root
 
-# rsyslog_umask: '0022'
+rsyslog_umask: '0022'
 
 rsyslog_rotated_logs:
   - /var/log/auth.log
