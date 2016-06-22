@@ -1,6 +1,6 @@
 ---
 
-rsyslog_local_logging: yes
+rsyslog_enable_local_logging: yes
 
 rsyslog_modules: ["imklog", "imuxsock"]
 
