@@ -10,3 +10,9 @@
     backup=yes
 
   notify: ["restart rsyslog"]
+
+- name: enable rsyslog service
+  service: >
+    name=rsyslog
+    state=started
+    enabled=yes
