@@ -16,7 +16,7 @@ rsyslog_imjournal_file: imjournal.state
 
 rsyslog_relays: []
 
-rsyslog_relay_port: 514
+rsyslog_port: 514
 
 rsyslog_preserve_fqdn: 'on'
 
