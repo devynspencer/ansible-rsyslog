@@ -5,15 +5,17 @@ module(load="{{ module }}")
 {% endfor %}
 
 {% if (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7") %}
-# enable systemd journal as an input
-module(load="imjournal")
-$IMJournalStateFile {{ rsyslog_imjournal_file }}
+{% if "imuxsock" not in rsyslog_modules %}
+module(load="imuxsock")
+{% endif %}
+
+$OmitLocalLogging off
+$SystemLogSocketName /run/systemd/journal/syslog
 {% endif %}
 
 $WorkDirectory {{ rsyslog_work_dir }}
-$PreserveFQDN {{ rsyslog_preserve_fqdn }}
-
-$OmitLocalLogging {{ rsyslog_omit_local_logging }}
+$LocalHostName {{ inventory_hostname }}
+$PreserveFQDN {% if rsyslog_preserve_fqdn %}on{% else %}off{% endif %}
 
 $FileOwner {{ rsyslog_user }}
 $FileGroup {{ rsyslog_group }}
