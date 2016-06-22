@@ -14,7 +14,7 @@ rsyslog_destinations: []
 
 rsyslog_port: 514
 
-rsyslog_preserve_fqdn: 'on'
+rsyslog_preserve_fqdn: yes
 
 rsyslog_user: root
 
