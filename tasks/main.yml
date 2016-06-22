@@ -15,7 +15,7 @@
 - name: include local logging tasks
   include: local.yml
   tags: ["rsyslog:configure", "configure"]
-  when: rsyslog_local_logging == true
+  when: rsyslog_local_logging
 
 - name: include remote logging tasks
   include: remote.yml
