@@ -14,7 +14,7 @@ rsyslog_omit_local_logging: 'on'
 
 rsyslog_imjournal_file: imjournal.state
 
-rsyslog_relays: []
+rsyslog_destinations: []
 
 rsyslog_port: 514
 

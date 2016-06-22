@@ -1,20 +1,23 @@
 {{ ansible_managed | comment }}
 
-{% for server in rsyslog_relays -%}
+{% include "json.part.j2" %}
 
 {# don't configure self as remote log destination #}
-{% if server != ansible_fqdn -%}
+{%- for remote in rsyslog_destinations -%}
+{%- if remote != ansible_fqdn -%}
 
 #
-# send logs to remote relay: {{ server }}
+# remote server: {{ remote.server }}:{{ remote.port }}
+# log format: {{ remote.format }}
 #
-$ActionQueueFileName        forward_logs_to_{{ server }}
+$ActionQueueFileName        forward_logs_to_{{ remote }}
 $ActionQueueMaxDiskSpace    1g
 $ActionQueueSaveOnShutdown  on
 $ActionQueueType            LinkedList
 $ActionResumeRetryCount     -1
 $ActionFileDefaultTemplate  {{ rsyslog_action_template }}
-*.* @@{{ server }}:{{ rsyslog_relay_port }}
+*.* @@{{ remote.server }}:{{ remote.port | default(rsyslog_port) }}{% if server.format == "json" %};as_json{% endif %}
 
-{% endif %}
-{% endfor %}
+{%- endfor -%}
+{%- endif -%}
+{%- endfor -%}
