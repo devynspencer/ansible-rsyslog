@@ -10,10 +10,6 @@ rsyslog_relay_logs_dir: /srv/logs
 
 rsyslog_action_template: RSYSLOG_TraditionalFileFormat
 
-rsyslog_omit_local_logging: 'on'
-
-rsyslog_imjournal_file: imjournal.state
-
 rsyslog_destinations: []
 
 rsyslog_port: 514
