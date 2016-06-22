@@ -18,6 +18,17 @@ $ActionResumeRetryCount     -1
 $ActionFileDefaultTemplate  {{ rsyslog_action_template }}
 *.* @@{{ remote.server }}:{{ remote.port | default(rsyslog_port) }}{% if server.format == "json" %};as_json{% endif %}
 
+{%- else -%}
+#
+# uh-oh!
+#
+# It looks like no remote destinations have been configured for this
+# server to send its logs to!
+#
+# To configure a destination, add the following to the appropriate
+# group_vars or host_vars file:
+#
+#   syslog_destinations: ["server.example.com"]
 {%- endfor -%}
 {%- endif -%}
 {%- endfor -%}
