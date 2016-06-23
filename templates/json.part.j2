@@ -1,5 +1,5 @@
 # format output as json
-template(name="as_json" type="list" option.json="on") {
+template(name="remote_json" type="list" option.json="on") {
 	constant(value="{")
 	constant(value="\"@timestamp\":\"")         property(name="timegenerated" dateFormat="rfc3339")
 	constant(value="\",\"@version\":\"1")
