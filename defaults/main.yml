@@ -1,18 +1,20 @@
 ---
 
+rsyslog_enable_stats: yes
+
 rsyslog_modules: ["imklog", "imuxsock"]
 
 rsyslog_work_dir: /var/lib/rsyslog
 
 rsyslog_relay_logs_dir: /srv/logs
 
+rsyslog_debug_log: /var/log/rsyslog.log
+
 rsyslog_default_template: RSYSLOG_TraditionalFileFormat
 
 rsyslog_destinations: []
 
 rsyslog_port: 514
-
-rsyslog_preserve_fqdn: yes
 
 rsyslog_user: root
 
