@@ -1,32 +1,24 @@
 {{ ansible_managed | comment }}
 
-{% for module in rsyslog_modules %}
-module(load="{{ module }}")
-{% endfor %}
-
-{% if (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7") %}
-{% if "imuxsock" not in rsyslog_modules %}
 module(load="imuxsock")
+
+{% if rsyslog_manage_journald %}
+module(load="imuxsock" sysSock.use="on" sysSock.name="/run/systemd/journal/syslog")
 {% endif %}
 
-$OmitLocalLogging off
-$SystemLogSocketName /run/systemd/journal/syslog
+{% if rsyslog_enable_stats %}
+module(load="impstats" interval="600" log.syslog="off" log.file="/var/log/stats.log")
 {% endif %}
+
+global(
+	localHostname="{{ inventory_fqdn }}"
+	preserveFQDN="on"
+	workDirectory="{{ rsyslog_work_directory }}"
+	debug.logFile="{{ rsyslog_debug_log }}"
+)
+
+$ActionFileDefaultTemplate {{ rsyslog_default_template }}
 
 $WorkDirectory {{ rsyslog_work_dir }}
-$LocalHostName {{ inventory_hostname }}
-$PreserveFQDN {% if rsyslog_preserve_fqdn %}on{% else %}off{% endif %}
-
-$FileOwner {{ rsyslog_user }}
-$FileGroup {{ rsyslog_group }}
-$FileCreateMode {{ rsyslog_file_mode | default('0644') }}
-
-$DirOwner {{ rsyslog_user }}
-$DirGroup {{ rsyslog_group }}
-$DirCreateMode {{ rsyslog_dir_mode | default('0755') }}
-
-{% if (rsyslog_umask is defined) and (rsyslog_umask | string) %}
-$Umask {{ rsyslog_umask }}
-{% endif %}
 
 $IncludeConfig /etc/rsyslog.d/*.conf

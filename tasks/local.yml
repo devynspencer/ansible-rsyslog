@@ -10,3 +10,4 @@
     backup=yes
 
   notify: ["restart rsyslog"]
+  when: rsyslog_local_output | length > 0

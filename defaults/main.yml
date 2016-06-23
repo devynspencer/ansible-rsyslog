@@ -1,6 +1,6 @@
 ---
 
-rsyslog_enable_local_logging: yes
+rsyslog_enable_stats: yes
 
 rsyslog_modules: ["imklog", "imuxsock"]
 
@@ -8,13 +8,13 @@ rsyslog_work_dir: /var/lib/rsyslog
 
 rsyslog_relay_logs_dir: /srv/logs
 
-rsyslog_action_template: RSYSLOG_TraditionalFileFormat
+rsyslog_debug_log: /var/log/rsyslog.log
+
+rsyslog_default_template: RSYSLOG_TraditionalFileFormat
 
 rsyslog_destinations: []
 
 rsyslog_port: 514
-
-rsyslog_preserve_fqdn: yes
 
 rsyslog_user: root
 
@@ -26,6 +26,33 @@ rsyslog_rotated_logs:
   - /var/log/auth.log
   - /var/log/mail.log
   - /var/log/cron.log
-  - /var/log/spooler.log
+  - /var/log/spool.log
   - /var/log/boot.log
   - /var/log/messages
+
+rsyslog_local_output:
+  - facility: kern
+    file: /dev/console
+
+  - facility: authpriv
+    file: /var/log/auth.log
+
+  - facility: mail
+    file: /var/log/mail.log
+
+  - facility: cron
+    file: /var/log/cron.log
+
+  - facility: uucp,news
+    severity: crit
+    file: /var/log/spool.log
+
+  - facility: local7
+    file: /var/log/boot.log
+
+  - severity: info
+    file: /var/log/messages
+
+  - facility: mail,authpriv,cron
+    severity: none
+    file: /var/log/messages

@@ -2,20 +2,18 @@
 
 {% include "json.part.j2" %}
 
-{% for remote in rsyslog_destinations if (remote != ansible_fqdn) %}
-
-#
-# remote server: {{ remote.server }}:{{ remote.port }}
-# log format: {{ remote.format }}
-#
-$ActionQueueFileName        {{ remote.server }}.queue
-$ActionQueueMaxDiskSpace    1g
-$ActionQueueSaveOnShutdown  on
-$ActionQueueType            LinkedList
-$ActionResumeRetryCount     -1
-$ActionFileDefaultTemplate  {{ rsyslog_action_template }}
-*.* @@{{ remote.server }}:{{ remote.port | default(rsyslog_port) }}{% if remote.format == "json" %};as_json{% endif %}
-
+{% for remote in rsyslog_destinations %}
+*.* action(type="omfwd"
+	target="{{ remote.server }}"
+	port="{{ remote.port | default("514") }}"
+	protocol="{{ remote.protocol | default("tcp") }}
+	action.resumeRetryCount="-1"
+	queue.fileName="{{ remote.server }}.queue"
+	queue.size="1g"
+	queue.type="LinkedList"
+	queue.saveOnShutdown="on"
+	template="remote_json"
+)
 {% else %}
 #
 # uh-oh!
