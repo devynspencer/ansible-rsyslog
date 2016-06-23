@@ -50,8 +50,7 @@ rsyslog_local_output:
   - facility: local7
     file: /var/log/boot.log
 
-  - facility: *
-    severity: info
+  - severity: info
     file: /var/log/messages
 
   - facility: mail,authpriv,cron
