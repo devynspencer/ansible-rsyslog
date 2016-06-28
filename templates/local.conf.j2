@@ -10,12 +10,12 @@ ruleset(name="local") {
 			{% if rsyslog_default_omfile_template is defined %}
 			template="{{ rsyslog_default_omfile_template }}"
 			{% endif %}
-			dirCreateMode="{{ rsyslog_dir_mode }}"
+			dirCreateMode="{{ rsyslog_directory_mode }}"
 			fileCreateMode="{{ rsyslog_file_mode }}"
 			fileOwner="{{ rsyslog_file_owner }}"
 			fileGroup="{{ rsyslog_file_group }}"
-			dirOwner="{{ rsyslog_dir_owner }}"
-			dirGroup="{{ rsyslog_dir_group }}"
+			dirOwner="{{ rsyslog_directory_owner }}"
+			dirGroup="{{ rsyslog_directory_group }}"
 		)
 
 		{% for log in rsyslog_local_output %}

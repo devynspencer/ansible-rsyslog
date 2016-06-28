@@ -1,5 +1,17 @@
 ---
 
+rsyslog_directory_owner: root
+
+rsyslog_directory_group: root
+
+rsyslog_directory_mode: "0755"
+
+rsyslog_file_owner: root
+
+rsyslog_file_group: root
+
+rsyslog_file_mode: "0644"
+
 rsyslog_manage_journald: no
 
 rsyslog_enable_stats: yes
