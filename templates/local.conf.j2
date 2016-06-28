@@ -7,7 +7,9 @@ ruleset(name="local") {
 		module(load="imklog")
 
 		module(load="builtin:omfile"
+			{% if rsyslog_default_omfile_template is defined %}
 			template="{{ rsyslog_default_omfile_template }}"
+			{% endif %}
 			dirCreateMode="{{ rsyslog_dir_mode }}"
 			fileCreateMode="{{ rsyslog_file_mode }}"
 			fileOwner="{{ rsyslog_file_owner }}"
@@ -18,7 +20,7 @@ ruleset(name="local") {
 
 		{% for log in rsyslog_local_output %}
 		{{ log.facility | default("*") }}.{{ log.severity | default("*") }} action(
-			name="local_{{ log.facility }}"
+			name="local_{{ log.facility | default("*") }}"
 			type="omfile"
 			file="{{ log.file }}"
 		)
