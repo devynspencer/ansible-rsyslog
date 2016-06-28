@@ -18,7 +18,7 @@ ruleset(name="local") {
 			dirGroup="{{ rsyslog_directory_group }}"
 		)
 
-		{% for log in rsyslog_local_output %}
+		{% for log in rsyslog_local_outputs %}
 		{{ log.facility | default("*") }}.{{ log.severity | default("*") }} action(
 			name="local_{{ log.facility | default("*") }}"
 			type="omfile"
