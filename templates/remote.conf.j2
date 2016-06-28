@@ -6,7 +6,7 @@
 *.* action(type="omfwd"
 	target="{{ remote.server }}"
 	port="{{ remote.port | default("514") }}"
-	protocol="{{ remote.protocol | default("tcp") }}
+	protocol="{{ remote.protocol | default("tcp") }}"
 	action.resumeRetryCount="-1"
 	queue.fileName="{{ remote.server }}.queue"
 	queue.size="1g"
