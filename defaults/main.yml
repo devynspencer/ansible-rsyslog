@@ -8,7 +8,7 @@ rsyslog_modules: ["imklog", "imuxsock"]
 
 rsyslog_work_directory: /var/lib/rsyslog
 
-rsyslog_relay_logs_dir: /srv/logs
+rsyslog_relay_logs_directory: /srv/logs
 
 rsyslog_debug_log: /var/log/rsyslog.log
 
