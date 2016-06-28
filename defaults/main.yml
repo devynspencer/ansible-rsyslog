@@ -4,7 +4,7 @@ rsyslog_enable_stats: yes
 
 rsyslog_modules: ["imklog", "imuxsock"]
 
-rsyslog_work_dir: /var/lib/rsyslog
+rsyslog_work_directory: /var/lib/rsyslog
 
 rsyslog_relay_logs_dir: /srv/logs
 

@@ -2,7 +2,7 @@
 
 - name: ensure relay logs directory exists
   file: >
-    path={{ rsyslog_relay_logs_dir }}
+    path={{ rsyslog_relay_logs_directory }}
     owner={{ rsyslog_user }}
     group={{ rsyslog_group }}
     mode=0755
