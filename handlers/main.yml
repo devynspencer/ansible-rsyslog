@@ -7,3 +7,9 @@
 
 - name: verify rsyslog package version
   command: rsyslogd -v | grep rsyslogd
+  register: rsyslog_version_output
+
+  notify: ["print rsyslog package version"]
+
+- name: print rsyslog package version
+  debug: var=rsyslog_version_output
