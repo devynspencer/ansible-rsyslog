@@ -14,8 +14,6 @@ rsyslog_debug_log: /var/log/rsyslog.log
 
 rsyslog_default_template: RSYSLOG_TraditionalFileFormat
 
-rsyslog_destinations: []
-
 rsyslog_port: 514
 
 rsyslog_user: root
@@ -32,7 +30,7 @@ rsyslog_rotated_logs:
   - /var/log/boot.log
   - /var/log/messages
 
-rsyslog_local_output:
+rsyslog_local_outputs:
   - facility: kern
     file: /dev/console
 
@@ -58,3 +56,7 @@ rsyslog_local_output:
   - facility: mail,authpriv,cron
     severity: none
     file: /var/log/messages
+
+rsyslog_remote_outputs: []
+
+rsyslog_remote_inputs: []

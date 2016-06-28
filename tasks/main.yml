@@ -15,17 +15,17 @@
 - name: include local logging tasks
   include: local.yml
   tags: ["rsyslog:configure", "configure"]
-  when: rsyslog_enable_local_logging
+  when: rsyslog_local_outputs | length
 
 - name: include remote logging tasks
   include: remote.yml
   tags: ["rsyslog:configure", "configure"]
-  when: rsyslog_destinations | length > 0
+  when: (rsyslog_remote_outputs | length
 
 - name: include relay server configuration tasks
   include: relay.yml
   tags: ["rsyslog:relay", "relay"]
-  when: false
+  when: rsyslog_remote_inputs | length
 
 - name: include logrotate partial configuration tasks
   include: logrotate.yml

@@ -2,7 +2,7 @@
 
 {% include "json.part.j2" %}
 
-{% for remote in rsyslog_destinations %}
+{% for remote in rsyslog_remote_outputs %}
 *.* action(type="omfwd"
 	target="{{ remote.server }}"
 	port="{{ remote.port | default("514") }}"
@@ -24,5 +24,5 @@
 # To configure a destination, add the following to the appropriate
 # group_vars or host_vars file:
 #
-#   syslog_destinations: ["server.example.com"]
+#   rsyslog_remote_outputs: ["server.example.com"]
 {% endfor %}
