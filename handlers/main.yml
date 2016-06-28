@@ -4,3 +4,6 @@
   service: >
     name=rsyslog
     state=restarted
+
+- name: verify rsyslog package version
+  command: rsyslogd -v | grep rsyslogd

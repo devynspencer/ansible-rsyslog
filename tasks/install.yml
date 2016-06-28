@@ -46,4 +46,5 @@
     name={{ item }}
     state=latest
 
+  notify: ["verify rsyslog package version"]
   with_items: "{{ rsyslog_packages }}"
