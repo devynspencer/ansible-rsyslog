@@ -1,5 +1,7 @@
 ---
 
+rsyslog_manage_journald: no
+
 rsyslog_enable_stats: yes
 
 rsyslog_modules: ["imklog", "imuxsock"]
