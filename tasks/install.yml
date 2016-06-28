@@ -1,6 +1,6 @@
 ---
 
-- name: ensure work directory exists
+- name: create work directory
   file: >
     path={{ rsyslog_work_directory }}
     owner={{ rsyslog_user }}
@@ -8,7 +8,7 @@
     mode=0755
     state=directory
 
-- name: ensure includes directory exists
+- name: create config includes directory
   file: >
     path=/etc/rsyslog.d
     owner=root
@@ -16,36 +16,32 @@
     mode=0755
     state=directory
 
-- block:
+- name: add rsyslog package repository (yum)
+  template: >
+    src=templates/rsyslog.repo.j2
+    dest=/etc/yum.repos.d/rsyslog.repo
+    owner=root
+    group=root
+    mode=0644
 
-    - name: ensure package repository is installed
-      template: >
-        src=templates/rsyslog.repo.j2
-        dest=/etc/yum.repos.d/rsyslog.repo
-        owner=root
-        group=root
-        mode=0644
+  when: ansible_os_family == "RedHat"
 
-      when: ansible_os_family == "RedHat"
+- name: install adiscon gpg key (apt)
+  apt_key: keyserver={{ rsyslog_gpg_key.keyserver }} id={{ rsyslog_gpg_key.id }}
 
-    - name: install ubuntu gpg key
-      apt_key: >
-        keyserver=keyserver.ubuntu.com
-        id=AEF0CF8E
+  when: (ansible_os_family == "Debian") and (rsyslog_gpg_key is defined)
 
-      when: ansible_os_family == "Debian"
+- name: add rsyslog package repository (apt)
+  template: >
+    src=templates/rsyslog.list.j2
+    dest=/etc/apt/sources.list.d/rsyslog.list
+    owner=root
+    group=root
+    mode=0644
 
-    - name: ensure package repository is installed
-      apt_repository: >
-        repo="deb {{ rsyslog_repository_url }}"
-        update_cache=yes
-        state=present
+  when: (ansible_os_family == "Debian") and (rsyslog_repository_url is defined)
 
-      when: ansible_os_family == "Debian"
-
-  when: rsyslog_repository_url is defined
-
-- name: ensure rsyslog package is installed
+- name: install rsyslog package(s)
   package: >
     name={{ item }}
     state=latest

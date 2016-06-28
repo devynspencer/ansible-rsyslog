@@ -3,3 +3,7 @@
 rsyslog_repository_url: http://ppa.launchpad.net/adiscon/v8-stable/ubuntu {{ ansible_distribution_release }} main
 
 rsyslog_manage_journald: yes
+
+rsyslog_gpg_key:
+  id: 5234BF2B
+  keyserver: keyserver.ubuntu.com
