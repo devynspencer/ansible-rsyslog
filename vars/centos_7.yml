@@ -1,3 +1,7 @@
 ---
 
-rsyslog_manage_journald: yes
+rsyslog_modules: ["imuxsock", "imklog"]
+
+rsyslog_omit_local_logging: no
+
+rsyslog_system_log_socket: /run/systemd/journal/syslog

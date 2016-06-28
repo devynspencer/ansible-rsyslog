@@ -1,24 +1,41 @@
 {{ ansible_managed | comment }}
 
-module(load="imuxsock")
+global(
+	workDirectory="{{ rsyslog_work_directory }}"
+	localHostname="{{ rsyslog_local_hostname | default(inventory_hostname) }}"
+	preserveFQDN="{% if rsyslog_preserve_fqdn %}on{% else %}off{% endif %}"
+	{% if rsyslog_enable_debug_log %}debug.logFile="{{ rsyslog_debug_log }}"{% endif %}
+)
 
-{% if rsyslog_manage_journald %}
-module(load="imuxsock" sysSock.use="on" sysSock.name="/run/systemd/journal/syslog")
-{% endif %}
+{% for module in rsyslog_modules %}
+module(load="{{ module }}")
+{% endfor %}
 
 {% if rsyslog_enable_stats %}
-module(load="impstats" interval="600" log.syslog="off" log.file="/var/log/stats.log")
+module(load="impstats" interval="10" resetCounters="on" log.file="/var/log/stats.log" log.syslog="off")
 {% endif %}
 
-global(
-	localHostname="{{ inventory_hostname }}"
-	preserveFQDN="on"
-	workDirectory="{{ rsyslog_work_directory }}"
-	debug.logFile="{{ rsyslog_debug_log }}"
-)
+{% if (rsyslog_omit_local_logging is defined) and rsyslog_omit_local_logging %}
+$OmitLocalLogging on
+{% elif rsyslog_omit_local_logging is defined %}
+$OmitLocalLogging off
+{% endif %}
+
+{% if (rsyslog_repeated_message_reduction is defined) and rsyslog_repeated_message_reduction %}
+$RepeatedMsgReduction on
+{% elif rsyslog_repeated_message_reduction is defined %}
+$RepeatedMsgReduction off
+{% endif %}
+
+{% if rsyslog_system_log_socket is defined %}
+$SystemLogSocketName {{ rsyslog_system_log_socket }}
+{% endif %}
+
+{% if rsyslog_imjournal_state_file is defined %}
+$IMJournalStateFile {{ rsyslog_imjournal_state_file }}
+{% endif %}
 
 $ActionFileDefaultTemplate {{ rsyslog_default_template }}
 
-$WorkDirectory {{ rsyslog_work_directory }}
-
-$IncludeConfig /etc/rsyslog.d/*.conf
+$IncludeConfig /etc/rsyslog.d/remote.conf
+$IncludeConfig /etc/rsyslog.d/local.conf

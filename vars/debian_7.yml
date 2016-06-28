@@ -1,5 +1,7 @@
 ---
 
+rsyslog_modules: ["imuxsock", "imklog"]
+
 rsyslog_repository_url: http://debian.adiscon.com/v8-stable {{ ansible_distribution_release }}/
 
 rsyslog_gpg_key:

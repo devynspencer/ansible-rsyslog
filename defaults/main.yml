@@ -12,11 +12,7 @@ rsyslog_file_group: root
 
 rsyslog_file_mode: "0644"
 
-rsyslog_manage_journald: no
-
 rsyslog_enable_stats: yes
-
-rsyslog_modules: ["imklog", "imuxsock"]
 
 rsyslog_work_directory: /var/lib/rsyslog
 
