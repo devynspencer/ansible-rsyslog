@@ -1,5 +1,9 @@
 ---
 
+rsyslog_enable_debug_log: yes
+
+rsyslog_preserve_fqdn: yes
+
 rsyslog_directory_owner: root
 
 rsyslog_directory_group: root
