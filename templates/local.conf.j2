@@ -6,7 +6,7 @@ ruleset(name="local") {
 
 		{% for log in rsyslog_local_outputs %}
 		{{ log.facility | default("*") }}.{{ log.severity | default("*") }} action(
-			name="local_{{ log.facility | default("*") }}"
+			{% if log.name is defined %}name="{{ log.name }}"{% endif %}
 			type="omfile"
 			file="{{ log.file }}"
 		)
