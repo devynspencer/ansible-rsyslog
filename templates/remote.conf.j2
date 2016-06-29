@@ -4,15 +4,12 @@
 
 {% for remote in rsyslog_remote_outputs %}
 *.* action(type="omfwd"
-	target="{{ remote.server }}"
-	port="{{ remote.port | default("514") }}"
-	protocol="{{ remote.protocol | default("tcp") }}"
-	action.resumeRetryCount="-1"
-	queue.fileName="{{ remote.server }}.queue"
-	queue.size="1g"
 	queue.type="LinkedList"
+	queue.filename="{{ remote.server }}.queue"
+	action.resumeRetryCount="-1"
 	queue.saveOnShutdown="on"
-	template="remote_json"
+	{% if remote.format == "json" %}template="remote_json"{% endif %}
+	target="{{ remote.server }}" port="{{ remote.port | default("514") }}" protocol="{{ remote.protocol | default("tcp") }}"
 )
 {% else %}
 #
