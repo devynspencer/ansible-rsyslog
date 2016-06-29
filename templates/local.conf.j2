@@ -4,8 +4,6 @@ ruleset(name="local") {
 
 	if $inputname != "imfile" then {
 
-		module(load="imklog")
-
 		{% for log in rsyslog_local_outputs %}
 		{{ log.facility | default("*") }}.{{ log.severity | default("*") }} action(
 			name="local_{{ log.facility | default("*") }}"
