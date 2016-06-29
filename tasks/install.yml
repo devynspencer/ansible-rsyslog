@@ -47,7 +47,6 @@
     update_cache=yes
     state=latest
 
-  notify: ["verify rsyslog package version"]
   with_items: "{{ rsyslog_packages }}"
   when: ansible_os_family == "Debian"
 
@@ -57,6 +56,5 @@
     update_cache=yes
     state=latest
 
-  notify: ["verify rsyslog package version"]
   with_items: "{{ rsyslog_packages }}"
   when: ansible_os_family =="RedHat"
