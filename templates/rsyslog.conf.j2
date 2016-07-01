@@ -39,3 +39,7 @@ $ActionFileDefaultTemplate {{ rsyslog_default_template }}
 
 $IncludeConfig /etc/rsyslog.d/remote.conf
 $IncludeConfig /etc/rsyslog.d/local.conf
+
+{% if rsyslog_ansible_destinations %}
+$IncludeConfig /etc/rsyslog.d/ansible.conf
+{% endif %}

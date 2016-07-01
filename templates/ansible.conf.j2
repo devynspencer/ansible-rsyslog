@@ -1,0 +1,26 @@
+{{ ansible_managed | comment }}
+
+module(load="imfile" PollingInterval="2")
+
+input(type="imfile"
+	File="/var/log/ansible.log"
+	Tag="ansible"
+	StateFile="ansible.state"
+	Facility="daemon"
+)
+
+if $programname == 'ansible' then {
+{% for remote in rsyslog_ansible_destinations %}
+	*.* action(type="omfwd"
+		target="{{ remote.server }}"
+		port="{{ remote.port | default(514) }}"
+		protocol="{{ remote.protocol | default("tcp") }}"
+		queue.type="LinkedList"
+		queue.filename="ansible:{{ remote.server }}"
+		action.resumeRetryCount="-1"
+		queue.saveOnShutdown="on"
+		template="remote_json"
+	)
+{% endfor %}
+	stop
+}

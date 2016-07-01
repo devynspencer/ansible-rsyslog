@@ -72,3 +72,5 @@ rsyslog_local_outputs:
 rsyslog_remote_outputs: []
 
 rsyslog_remote_inputs: []
+
+rsyslog_ansible_destinations: []
