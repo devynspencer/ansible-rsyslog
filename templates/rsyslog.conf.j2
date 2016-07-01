@@ -37,8 +37,13 @@ $IMJournalStateFile {{ rsyslog_imjournal_state_file }}
 
 $ActionFileDefaultTemplate {{ rsyslog_default_template }}
 
+{% if rsyslog_remote_outputs %}
 $IncludeConfig /etc/rsyslog.d/remote.conf
+{% endif %}
+
+{% if rsyslog_local_outputs %}
 $IncludeConfig /etc/rsyslog.d/local.conf
+{% endif %}
 
 {% if rsyslog_ansible_destinations %}
 $IncludeConfig /etc/rsyslog.d/ansible.conf
