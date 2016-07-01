@@ -1,19 +1,11 @@
 {{ ansible_managed | comment }}
 
-ruleset(name="local") {
+if $inputname != "imfile" then {
 
-	if $inputname != "imfile" then {
-
-		{% for log in rsyslog_local_outputs %}
-		{{ log.facility | default("*") }}.{{ log.severity | default("*") }} action(
-			{% if log.name is defined %}name="{{ log.name }}"{% endif %}
-			type="omfile"
-			file="{{ log.file }}"
-		)
-		{% endfor %}
-
-	}
+	{% for log in rsyslog_local_outputs %}
+	{{ log.facility | default("*") }}.{{ log.severity | default("*") }} action(
+		{% if log.name is defined %}name="{{ log.name }}"{% endif %}
+		type="omfile" file="{{ log.file }}")
+	{% endfor %}
 
 }
-
-$DefaultRuleset local
