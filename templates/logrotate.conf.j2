@@ -1,8 +1,0 @@
-{{ ansible_managed | comment }}
-
-{% for log in rsyslog_rotated_logs %}
-{{ log }} {
-	missingok
-	notifempty
-}
-{% endfor %}

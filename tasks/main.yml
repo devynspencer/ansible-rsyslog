@@ -26,8 +26,3 @@
   include: relay.yml
   tags: ["rsyslog:relay", "relay"]
   when: rsyslog_remote_inputs | length
-
-- name: include logrotate partial configuration tasks
-  include: logrotate.yml
-  tags: ["rsyslog:logrotate", "logrotate"]
-  when: rsyslog_rotated_logs | length
