@@ -41,20 +41,18 @@
 
   when: (ansible_os_family == "Debian") and (rsyslog_repository_url is defined)
 
-- name: install rsyslog package(s) (apt)
+- name: install rsyslog (apt)
   apt: >
-    name={{ item }}
+    name=rsyslog
     update_cache=yes
     state=latest
 
-  with_items: "{{ rsyslog_packages }}"
   when: ansible_os_family == "Debian"
 
-- name: install rsyslog package(s) (yum)
+- name: install rsyslog (yum)
   yum: >
-    name={{ item }}
+    name=rsyslog
     update_cache=yes
     state=latest
 
-  with_items: "{{ rsyslog_packages }}"
   when: ansible_os_family =="RedHat"
