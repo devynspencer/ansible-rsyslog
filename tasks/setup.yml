@@ -6,3 +6,16 @@
     - "vars/{{ ansible_distribution | lower }}_{{ ansible_distribution_major_version }}.yml"
     - "vars/{{ ansible_os_family | lower }}.yml"
     - "vars/main.yml"
+
+- name: get rsyslog version
+  shell: rsyslogd -v | grep -P '\d+\.\d+\.\d+' -o
+  changed_when: false
+  register: rsyslog_version_output
+
+- set_fact: rsyslog_version={{ rsyslog_version_output.stdout }}
+
+- set_fact: rsyslog_major_version={{ rsyslog_version | regex_replace("(\d+)\.(\d+)\.\d+", "\1") }}
+
+- set_fact: rsyslog_minor_version={{ rsyslog_version | regex_replace("(\d+)\.(\d+)\.\d+", "\2") }}
+
+- debug: "msg='rsyslog version: {{ rsyslog_version }} (major: {{ rsyslog_major_version }}, minor: {{ rsyslog_minor_version }})'"
