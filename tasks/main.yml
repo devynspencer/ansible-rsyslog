@@ -4,6 +4,11 @@
   include: setup.yml
   tags: ["rsyslog:setup", "setup", "rsyslog"]
 
+- name: include repository tasks
+  include: repositories.yml
+  tags: ["rsyslog:install", "install", "rsyslog"]
+  when: rsyslog_enable_adiscon_repositories
+
 - name: include installation tasks
   include: install.yml
   tags: ["rsyslog:install", "install", "rsyslog"]

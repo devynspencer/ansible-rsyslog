@@ -1,5 +1,6 @@
 ---
 
+rsyslog_enable_adiscon_repositories: no
 
 rsyslog_preserve_fqdn: yes
 

@@ -1,0 +1,26 @@
+---
+
+- name: add rsyslog package repository (yum)
+  template: >
+    src=templates/rsyslog.repo.j2
+    dest=/etc/yum.repos.d/rsyslog.repo
+    owner=root
+    group=root
+    mode=0644
+
+  when: ansible_os_family == "RedHat"
+
+- name: install adiscon gpg key (apt)
+  apt_key: keyserver={{ rsyslog_gpg_key.keyserver }} id={{ rsyslog_gpg_key.id }}
+
+  when: (ansible_os_family == "Debian") and (rsyslog_gpg_key is defined)
+
+- name: add rsyslog package repository (apt)
+  template: >
+    src=templates/rsyslog.list.j2
+    dest=/etc/apt/sources.list.d/rsyslog.list
+    owner=root
+    group=root
+    mode=0644
+
+  when: (ansible_os_family == "Debian") and (rsyslog_repository_url is defined)
