@@ -1,0 +1,10 @@
+---
+
+- name: configure forwarding to rsyslog
+  lineinfile: >
+    dest=/etc/systemd/journald.conf
+    regexp="^#ForwardToSyslog=yes"
+    line="ForwardToSyslog=yes"
+    backup=yes
+
+  notify: ["restart journald"]

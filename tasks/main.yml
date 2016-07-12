@@ -30,3 +30,8 @@
   include: relay.yml
   tags: ["rsyslog:relay", "relay", "rsyslog"]
   when: rsyslog_remote_inputs
+
+- name: include journald tasks
+  include: journald.yml
+  tags: ["rsyslog:journald", "journald", "rsyslog"]
+  when: ansible_service_mgr == "systemd"
