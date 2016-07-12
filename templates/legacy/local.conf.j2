@@ -1,0 +1,9 @@
+{{ ansible_managed | comment }}
+
+if $inputname != "imfile" then {
+
+	{% for log in rsyslog_local_outputs %}
+	{{ log.facility | default("*") }}.{{ log.severity | default("*") }} {{ log.file }}
+	{% endfor %}
+
+}

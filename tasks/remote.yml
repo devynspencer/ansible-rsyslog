@@ -1,6 +1,6 @@
 ---
 
-- name: configure remote logging
+- name: configure remote logging (rainerscript syntax)
   template: >
     src=templates/remote.conf.j2
     dest=/etc/rsyslog.d/remote.conf
@@ -10,3 +10,16 @@
     backup=yes
 
   notify: ["restart rsyslog"]
+  when: rsyslog_version >= "7"
+
+- name: configure remote logging (legacy syntax)
+  template: >
+    src=templates/legacy/remote.conf.j2
+    dest=/etc/rsyslog.d/remote.conf
+    owner=root
+    group=root
+    mode=0644
+    backup=yes
+
+  notify: ["restart rsyslog"]
+  when: rsyslog_version < "7"

@@ -1,0 +1,16 @@
+{{ ansible_managed | comment }}
+
+{% for remote in rsyslog_remote_outputs if remote.format == "legacy" %}
+# log remotely to {{ remote.server }}:{{ remote.port }}
+$ActionQueueFileName {{ remote.server }}.queue
+$ActionQueueMaxDiskSpace 1g
+$ActionQueueSaveOnShutdown on
+$ActionQueueType LinkedList
+$ActionResumeRetryCount -1
+
+{% if remote.protocol is defined and remote.protocol == "udp" %}
+*.* @{{ remote.server }}:{{ remote.port | default(514) }}
+{% else %}
+*.* @@{{ remote.server }}:{{ remote.port | default(514) }}
+{% endif %}
+{% endfor %}

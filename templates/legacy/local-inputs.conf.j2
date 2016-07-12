@@ -1,0 +1,8 @@
+{{ ansible_managed | comment }}
+
+$ModLoad imfile
+
+{% for input in rsyslog_local_inputs %}
+$InputFileName {{ input.file }}
+$InputFileTag {{ input.tag }}
+{% endfor %}

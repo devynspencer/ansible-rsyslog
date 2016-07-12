@@ -1,6 +1,6 @@
 ---
 
-- name: configure rsyslog
+- name: configure rsyslog (rainerscript syntax)
   template: >
     src=templates/rsyslog.conf.j2
     dest=/etc/rsyslog.conf
@@ -10,6 +10,19 @@
     backup=yes
 
   notify: ["restart rsyslog"]
+  when: rsyslog_major_version >= "7"
+
+- name: configure rsyslog (legacy syntax)
+  template: >
+    src=templates/legacy/rsyslog.conf.j2
+    dest=/etc/rsyslog.conf
+    owner=root
+    group=root
+    mode=0644
+    backup=yes
+
+  notify: ["restart rsyslog"]
+  when: rsyslog_major_version < "7"
 
 - name: configure remote forwarding of ansible.log
   template: >

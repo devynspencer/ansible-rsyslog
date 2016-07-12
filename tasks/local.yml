@@ -1,12 +1,23 @@
 ---
 
-- name: configure local logging
+- name: configure local outputs (rainerscript syntax)
   template: >
     src=templates/local.conf.j2
     dest=/etc/rsyslog.d/local.conf
     owner=root
     group=root
     mode=0644
-    backup=yes
 
   notify: ["restart rsyslog"]
+  when: rsyslog_local_outputs and rsyslog_version >= "7"
+
+- name: configure local outputs (legacy syntax)
+  template: >
+    src=templates/legacy/local.conf.j2
+    dest=/etc/rsyslog.d/local.conf
+    owner=root
+    group=root
+    mode=0644
+
+  notify: ["restart rsyslog"]
+  when: rsyslog_local_outputs and rsyslog_version < "7"

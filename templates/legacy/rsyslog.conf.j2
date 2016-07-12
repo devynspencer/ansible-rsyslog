@@ -1,0 +1,55 @@
+{{ ansible_managed | comment }}
+
+$WorkDirectory {{ rsyslog_work_directory }}
+
+{% if rsyslog_local_hostname is defined %}
+$LocalHostname {{ rsyslog_local_hostname }}
+{% endif %}
+
+$PreserveFQDN {% if rsyslog_preserve_fqdn %}on{% else %}off{% endif %}
+
+{% if rsyslog_debug_log is defined %}
+$DebugFile {{ rsyslog_debug_log }}
+{% endif %}
+
+{% for module in rsyslog_modules %}
+$ModLoad {{ module }}
+{% endfor %}
+
+{% if (rsyslog_omit_local_logging is defined) and rsyslog_omit_local_logging %}
+$OmitLocalLogging on
+{% elif rsyslog_omit_local_logging is defined %}
+$OmitLocalLogging off
+{% endif %}
+
+{% if (rsyslog_repeated_message_reduction is defined) and rsyslog_repeated_message_reduction %}
+$RepeatedMsgReduction on
+{% elif rsyslog_repeated_message_reduction is defined %}
+$RepeatedMsgReduction off
+{% endif %}
+
+{% if rsyslog_system_log_socket is defined %}
+$SystemLogSocketName {{ rsyslog_system_log_socket }}
+{% endif %}
+
+{% if rsyslog_imjournal_state_file is defined %}
+$IMJournalStateFile {{ rsyslog_imjournal_state_file }}
+{% endif %}
+
+$ActionFileDefaultTemplate {{ rsyslog_default_template }}
+
+{% if rsyslog_remote_outputs %}
+$IncludeConfig /etc/rsyslog.d/remote.conf
+{% endif %}
+
+{% if rsyslog_local_inputs %}
+$IncludeConfig /etc/rsyslog.d/local-inputs.conf
+{% endif %}
+
+{% if rsyslog_local_outputs %}
+$IncludeConfig /etc/rsyslog.d/local.conf
+{% endif %}
+
+{% if rsyslog_ansible_destinations %}
+$IncludeConfig /etc/rsyslog.d/ansible.conf
+{% endif %}
