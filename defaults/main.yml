@@ -1,6 +1,5 @@
 ---
 
-rsyslog_enable_debug_log: yes
 
 rsyslog_preserve_fqdn: yes
 

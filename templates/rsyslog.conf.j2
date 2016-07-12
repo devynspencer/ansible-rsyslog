@@ -4,7 +4,9 @@ global(
 	workDirectory="{{ rsyslog_work_directory }}"
 	localHostname="{{ rsyslog_local_hostname | default(inventory_hostname) }}"
 	preserveFQDN="{% if rsyslog_preserve_fqdn %}on{% else %}off{% endif %}"
-	{% if rsyslog_enable_debug_log %}debug.logFile="{{ rsyslog_debug_log }}"{% endif %}
+	{% if rsyslog_debug_log is defined -%}
+	debug.logFile="{{ rsyslog_debug_log }}"
+	{%- endif -%}
 )
 
 {% for module in rsyslog_modules %}
