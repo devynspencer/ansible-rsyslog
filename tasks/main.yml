@@ -2,26 +2,26 @@
 
 - name: include setup tasks
   include: setup.yml
-  tags: ["rsyslog:setup", "setup"]
+  tags: ["rsyslog:setup", "setup", "rsyslog"]
 
 - name: include installation tasks
   include: install.yml
-  tags: ["rsyslog:install", "install"]
+  tags: ["rsyslog:install", "install", "rsyslog"]
 
 - name: include general configuration tasks
   include: configure.yml
-  tags: ["rsyslog:configure", "configure"]
+  tags: ["rsyslog:configure", "configure", "rsyslog"]
 
 - name: include local logging tasks
   include: local.yml
-  tags: ["rsyslog:configure", "configure"]
+  tags: ["rsyslog:configure", "configure", "rsyslog"]
 
 - name: include remote logging tasks
   include: remote.yml
-  tags: ["rsyslog:configure", "configure"]
+  tags: ["rsyslog:configure", "configure", "rsyslog"]
   when: rsyslog_remote_outputs
 
 - name: include relay server configuration tasks
   include: relay.yml
-  tags: ["rsyslog:relay", "relay"]
+  tags: ["rsyslog:relay", "relay", "rsyslog"]
   when: rsyslog_remote_inputs
