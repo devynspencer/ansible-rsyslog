@@ -13,6 +13,10 @@
   include: install.yml
   tags: ["rsyslog:install", "install", "rsyslog"]
 
+- name: include rsyslog version tasks
+  include: version.yml
+  tags: ["rsyslog:version", "version", "rsyslog"]
+
 - name: include general configuration tasks
   include: configure.yml
   tags: ["rsyslog:configure", "configure", "rsyslog"]
