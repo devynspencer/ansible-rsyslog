@@ -8,7 +8,7 @@
 	queue.filename="{{ remote.server }}.queue"
 	action.resumeRetryCount="-1"
 	queue.saveOnShutdown="on"
-	{% if remote.format == "json" %}template="remote_json"{% endif %}
+	{% if remote.format is defined %}template="remote_{{ remote.format }}"{% endif %}
 	target="{{ remote.server }}" port="{{ remote.port | default("514") }}" protocol="{{ remote.protocol | default("tcp") }}"
 )
 {% else %}
