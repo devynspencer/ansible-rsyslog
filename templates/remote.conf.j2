@@ -8,7 +8,9 @@
 	queue.filename="{{ remote.server }}.queue"
 	action.resumeRetryCount="-1"
 	queue.saveOnShutdown="on"
-	target="{{ remote.server }}" port="{{ remote.port | default("514") }}" protocol="{{ remote.protocol | default("tcp") }}"
 	template="remote_{{ remote.format }}"
+	target="{{ remote.server }}"
+	port="{{ remote.port | default("514") }}"
+	protocol="{{ remote.protocol | default("tcp") }}"
 )
 {% endfor %}
