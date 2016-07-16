@@ -2,14 +2,14 @@
 
 {% include "json.part.j2" %}
 
-{% for remote in rsyslog_remote_outputs %}
+{% for remote in rsyslog_remote_outputs if remote.format != "legacy" %}
 *.* action(type="omfwd"
 	queue.type="LinkedList"
 	queue.filename="{{ remote.server }}.queue"
 	action.resumeRetryCount="-1"
 	queue.saveOnShutdown="on"
-	{% if remote.format is defined %}template="remote_{{ remote.format }}"{% endif %}
 	target="{{ remote.server }}" port="{{ remote.port | default("514") }}" protocol="{{ remote.protocol | default("tcp") }}"
+	template="remote_{{ remote.format }}"
 )
 {% else %}
 #
