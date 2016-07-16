@@ -11,15 +11,4 @@
 	target="{{ remote.server }}" port="{{ remote.port | default("514") }}" protocol="{{ remote.protocol | default("tcp") }}"
 	template="remote_{{ remote.format }}"
 )
-{% else %}
-#
-# uh-oh!
-#
-# It looks like no remote destinations have been configured for this
-# server to send its logs to!
-#
-# To configure a destination, add the following to the appropriate
-# group_vars or host_vars file:
-#
-#   rsyslog_remote_outputs: ["server.example.com"]
 {% endfor %}
