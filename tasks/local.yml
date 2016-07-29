@@ -1,5 +1,16 @@
 ---
 
+- name: configure local inputs (rainerscript syntax)
+  template: >
+    src=templates/local-inputs.conf.j2
+    dest=/etc/rsyslog.d/local-inputs.conf
+    owner=root
+    group=root
+    mode=0644
+
+  notify: ["restart rsyslog"]
+  when: rsyslog_local_inputs and rsyslog_version >= "7"
+
 - name: configure local outputs (rainerscript syntax)
   template: >
     src=templates/local.conf.j2

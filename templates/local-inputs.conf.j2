@@ -1,0 +1,18 @@
+{{ ansible_managed | comment }}
+
+module(load="imfile" PollingInterval="10") #needs to be done just once
+
+{% for input in rsyslog_local_inputs %}
+input(type="imfile"
+	File="{{ input.file }}"
+	Tag="{{ input.tag }}"
+
+	{% if input.severity is defined -%}
+	Severity="{{ input.severity }}"
+	{%- endif %}
+
+	{% if input.facility is defined -%}
+	Facility="{{ input.facility }}"
+	{%- endif %}
+)
+{% endfor %}
