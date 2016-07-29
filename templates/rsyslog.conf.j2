@@ -50,7 +50,3 @@ $IncludeConfig /etc/rsyslog.d/remote.conf
 {% if rsyslog_local_outputs %}
 $IncludeConfig /etc/rsyslog.d/local.conf
 {% endif %}
-
-{% if rsyslog_ansible_destinations %}
-$IncludeConfig /etc/rsyslog.d/ansible.conf
-{% endif %}
